@@ -1,38 +1,71 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.main-app {
+  background: linear-gradient(to right, #49a07c, white); ;
   min-height: 100vh;
+  /* color: white; */
+  
+}
+
+.content-container {
+  row-gap: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.content-container-sub{
+  row-gap: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cta-button {
+  padding: 8px;
+  border: none;
+  border-radius: 12px;
+  min-width: 145px;
   color: white;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.status-button {
+  padding: 10px;
+  border-radius: 8px;
+  min-width: 250px;
+  font-size: 16px;
+  background: rgb(32, 129, 226);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.back-button {
+  padding: 10px;
+  border-radius: 8px;
+  min-width: 20px;
+  font-size: 14px;
+  background: orange;
 }
+
+.login-button {
+  background: green;
+}
+
+.search-button {
+  background: rgb(32, 129, 226);
+}
+
+.small {
+  padding: 4px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.btn-space {
+  margin-right: 5px;
+}
+
+.search {
+  width: 30%;
+}
+
