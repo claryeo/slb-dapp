@@ -4,8 +4,8 @@ import {useState, useEffect } from 'react';
 import Web3 from 'web3';
 
 import Button from 'react-bootstrap/Button';
-// import Toast from 'react-bootstrap/Toast';
-// import ToastContainer from 'react-bootstrap/ToastContainer';
+import Toast from 'react-bootstrap/Toast';
+import ToastContainer from 'react-bootstrap/ToastContainer';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -31,6 +31,11 @@ const BondSearch = (props) => {
   const [status, setStatus] = useState("");
 
   const [message, setMessage] = useState(" "); //default message
+
+  const [showAlertField, setShowAlertField] = useState(false);
+  const toggleShowAlertField = () => setShowAlertField(!showAlertField);
+
+  const [notif, setNotif] = useState(" "); 
 
   const web3 = new Web3(new Web3.providers.HttpProvider("https://babel-api.testnet.iotex.io"));
 
@@ -69,6 +74,7 @@ const BondSearch = (props) => {
     message[18] = await bondContract.methods.impactData_1().call();
     message[19] = await bondContract.methods.impactData_2().call();
     message[20] = await bondContract.methods.impactData_3().call();
+    message[21] = await bondContract.methods.bondsForSale().call();
     
     // console.log(message[16]);
     if(parseFloat(message[7]) > 0 && message[11] === '3'){
@@ -110,7 +116,7 @@ const BondSearch = (props) => {
       const message = await loadCurrentMessage();
       setMessage(message);  
       const KPIArray = [];
-      for (let i = 21; i < message.length; i++){
+      for (let i = 22; i < message.length; i++){
         KPIArray.push(message[i]);
       } 
       // console.log(KPIArray[0]);
@@ -157,6 +163,13 @@ const BondSearch = (props) => {
 
   const handleBondPurchase = (async (event) => {
     event.preventDefault();
+
+    if(numberOfBonds > message[21] || isNaN(numberOfBonds) === true){
+      setNotif('Invalid number of bonds purchased.');
+      setShowAlertField(true);
+      return;
+    }
+
     const iotexChainID = await web3.eth.net.getId();
     const paymentAmount = (bondPrice * numberOfBonds).toString();
     // console.log(paymentAmount);
@@ -187,6 +200,13 @@ const BondSearch = (props) => {
 
   const handleCouponClaim = (async (event) => {
     event.preventDefault();
+
+    if(couponPeriod > message[14] || isNaN(couponPeriod) === true){
+      setNotif('Invalid coupon period.');
+      setShowAlertField(true);
+      return;
+    }
+
     const iotexChainID = await web3.eth.net.getId();
 
     const transactionParameters = {
@@ -260,7 +280,22 @@ const BondSearch = (props) => {
           status = {status}
           setStatus = {setStatus}
         />
+      
+        <Row>
+        <Col md={5} className="mb-6">
+        <ToastContainer className="p-3" position= 'top-start'>
+
+        <Toast show={showAlertField} onClose={toggleShowAlertField} delay={3000} autohide>
+            <Toast.Header>
+            <strong className="me-auto">Notification</strong>
+            </Toast.Header>
+            <Toast.Body>{notif}</Toast.Body>
+        </Toast>
         
+        </ToastContainer>
+        </Col>
+      </Row>
+
       <Container>
       <Row>
         <Col xs={6}>
@@ -396,6 +431,8 @@ const BondSearch = (props) => {
       <Form className = "text-start" onSubmit={handleBondPurchase}>
       <Form.Text className="text-muted">
         Number of bonds purchased: {message[13]}
+        <br></br>
+        Number of bonds available for sale: {message[21]}
       </Form.Text>
       <InputGroup className="mb-3">
       <Form.Control
