@@ -132,7 +132,7 @@ const ReportImpact = (props) => {
 
   /*---------------------------------DATA PARSING FROM FILE (TUTORIAL)------------------------------------------*/
   // State to store parsed data
-  const [parsedData, setParsedData] = useState([]);
+  // const [parsedData, setParsedData] = useState([]);
 
   //State to store table Column name
   const [tableRows, setTableRows] = useState([]);
@@ -170,7 +170,7 @@ const ReportImpact = (props) => {
         });
 
         // Parsed Data Response in array format
-        setParsedData(results.data);
+        // setParsedData(results.data);
 
         // Filtered Column Names
         setTableRows(rowsArray[0]);
@@ -259,8 +259,8 @@ const ReportImpact = (props) => {
     setNewDevice(event.target.value);
   }
 
-  // TODO: Uncomment when new contract is deployed
-  const handleRegisterDevice = (async () => {
+  const handleRegisterDevice = (async (event) => {
+    event.preventDefault();
     const iotexChainID = await web3.eth.net.getId();
 
     const transactionParameters = {
@@ -296,6 +296,7 @@ const ReportImpact = (props) => {
     <Row>
         <Col md={5} className="mb-6">
         <ToastContainer className="p-3" position= 'top-start'>
+        
         <Toast show={showAlert} onClose={toggleShowAlert}>
             <Toast.Header>
             <strong className="me-auto">Notification</strong>
@@ -345,22 +346,23 @@ const ReportImpact = (props) => {
       <h5 >Register IoT device</h5>
       <br></br>
 
-      <Form className = "text-start">
+      <Form onSubmit = {handleRegisterDevice} >
         <InputGroup className="mb-3">
         <Form.Control
-        placeholder="Device ID"
-        aria-label="Register device"
-        aria-describedby="register device bar"
-        onChange = {handleRegister}
+          required
+          placeholder="Device ID"
+          type="textarea"
+          name="registerDevice"
+          onChange = {handleRegister}
         />
         <Button 
-        onClick = {handleRegisterDevice} 
-        className="cta-button search-button" variant="outline-success" id="button-addon">
-        Register
+          type = "submit"
+          className="cta-button search-button" variant="outline-success" id="button-addon">
+          Register
         </Button>
         </InputGroup>
         
-        </Form>
+      </Form>
 
 
       <br></br>

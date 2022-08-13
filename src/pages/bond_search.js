@@ -155,7 +155,8 @@ const BondSearch = (props) => {
     setBonds(event.target.value);
   };
 
-  const handleBondPurchase = (async () => {
+  const handleBondPurchase = (async (event) => {
+    event.preventDefault();
     const iotexChainID = await web3.eth.net.getId();
     const paymentAmount = (bondPrice * numberOfBonds).toString();
     // console.log(paymentAmount);
@@ -184,7 +185,8 @@ const BondSearch = (props) => {
     setCouponPeriod(event.target.value);
   };
 
-  const handleCouponClaim = (async () => {
+  const handleCouponClaim = (async (event) => {
+    event.preventDefault();
     const iotexChainID = await web3.eth.net.getId();
 
     const transactionParameters = {
@@ -391,26 +393,27 @@ const BondSearch = (props) => {
       <h5 >Actions </h5>
 
       <br/><br/>
-      <Form className = "text-start">
+      <Form className = "text-start" onSubmit={handleBondPurchase}>
       <Form.Text className="text-muted">
         Number of bonds purchased: {message[13]}
       </Form.Text>
       <InputGroup className="mb-3">
       <Form.Control
+      required
       placeholder="Amount"
-      aria-label="Buy bonds"
-      aria-describedby="buy bonds bar"
+      type="textarea"
+      name="buyBonds"
       onChange = {handleBonds}
       />
       
-      <Button onClick = {handleBondPurchase} className="cta-button search-button" variant="outline-success" id="button-addon">
+      <Button type = "submit" className="cta-button search-button" variant="outline-success" id="button-addon">
       Buy Bonds
       </Button>
       </InputGroup>
 
       </Form>
       
-      <Form className = "text-start">
+      <Form className = "text-start" onSubmit={handleCouponClaim}>
       <Form.Text className="text-muted">
         Current period: {message[14]}
         <br></br>
@@ -418,12 +421,13 @@ const BondSearch = (props) => {
       </Form.Text>
       <InputGroup className="mb-3">
       <Form.Control
+      required
       placeholder="Coupon period"
-      aria-label="Claim coupon"
-      aria-describedby="claim coupon bar"
+      type="textarea"
+      name="claimCoupon"
       onChange = {handleCoupon}
       />
-      <Button onClick = {handleCouponClaim} className="cta-button search-button" variant="outline-success" id="button-addon">
+      <Button type = "submit" className="cta-button search-button" variant="outline-success" id="button-addon">
       Claim coupon
       </Button>
       </InputGroup>

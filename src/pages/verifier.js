@@ -151,11 +151,11 @@ const Verifier = () => {
     const [fileID, setFileID] = useState('');
 
     const inputHandlerFileID = event => {
-      event.preventDefault();
       setFileID(event.target.value);
     }
 
-    const handleClickFile = () => {
+    const handleClickFile = (event) => {
+      event.preventDefault();
       if(fileID !== ''){
       const url = `https://dweb.link/ipfs/${fileID}`;
       window.open(url, '_blank', 'noopener,noreferrer');
@@ -218,15 +218,6 @@ const Verifier = () => {
       });
   
     })
-
-    const checkInput = () => {
-      if(fileID === ''){
-        return false;
-      }
-      else{
-        return true;
-      }
-    }
     
     return (
         <>
@@ -306,7 +297,7 @@ const Verifier = () => {
             </Modal.Header>
 
     
-            <Form>
+            <Form onSubmit={handleClickFile}>
 
             <Modal.Body>
                 Obtain the latest IoT data uploaded by issuer.
@@ -329,7 +320,7 @@ const Verifier = () => {
 
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={handleClickFile} type = "submit" className="cta-button search-button" variant="success">
+                <Button type = "submit" className="cta-button search-button" variant="success">
                   Submit
                 </Button>
 

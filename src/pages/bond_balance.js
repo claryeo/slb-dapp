@@ -29,8 +29,11 @@ const BondBalance = (props) => {
   const [walletAddress, setWallet] = useState("");
   const [status, setStatus] = useState("");
 
-  const [showAlert, setShowAlert] = useState(false);
-  const toggleShowAlert = () => setShowAlert(!showAlert);
+  const [showAlertBalance, setShowAlertBalance] = useState(false);
+  const toggleShowAlertBalance = () => setShowAlertBalance(!showAlertBalance);
+
+  const [showAlertField, setShowAlertField] = useState(false);
+  const toggleShowAlertField = () => setShowAlertField(!showAlertField);
 
   const [notif, setNotif] = useState(" "); 
 
@@ -157,7 +160,7 @@ const BondBalance = (props) => {
   const handleBalance = () => {
     if(message[1] <= minBalance){
       setNotif('🚩Alert: Bond balance is low. Please top up.');
-      setShowAlert(true);
+      setShowAlertBalance(true);
     }
   }
 
@@ -174,23 +177,46 @@ const BondBalance = (props) => {
   }, [minBalance]);
 
 
-  const [topUpValue, setTopUpValue] = useState('');
+  const [topUpValue, setTopUpValue] = useState('0');
 
   const handleTopUpValue = event => {
     // 👇️ access textarea value
-    setTopUpValue(web3.utils.toWei(event.target.value));
+    if(isNaN(event.target.value) === false){
+      setTopUpValue(web3.utils.toWei(event.target.value));
+    }
+    else{
+      setNotif("Invalid top up value.");
+      setShowAlertField(true);
+    }
   };
 
-  const [withdrawValue, setWithdrawValue] = useState('');
+  const [withdrawValue, setWithdrawValue] = useState('0');
 
   const handleWithdrawValue = event => {
     // 👇️ access textarea value
-    setWithdrawValue(web3.utils.toWei(event.target.value));
+    if(isNaN(event.target.value) === false){
+      setWithdrawValue(web3.utils.toWei(event.target.value));
+    }
+    else{
+      setNotif("Invalid withdraw value.");
+      setShowAlertField(true);
+    }
   };
 
+  // const checkValue = (value) => {
+  //   if(value === ""){
+  //     setNotif('Invalid top-up value.');
+  //     setShowAlertField(true);
+  //     return false;
+  //   }
+  //   else{
+  //     return true;
+  //   }
+  // }
 
-  const handleTopUp = (async () => {
-    // console.log(topUpValue);
+  const handleTopUp = (async (event) => {
+    event.preventDefault();
+
     const iotexChainID = await web3.eth.net.getId();
 
     // const hex_value = '0x'+parseInt(topUpValue, 10).toString(16); //need to get hex value
@@ -212,8 +238,9 @@ const BondBalance = (props) => {
 
   })
 
-  const handleWithdraw= (async () => {
-    // console.log(withdrawValue);
+  const handleWithdraw= (async (event) => {
+    event.preventDefault();
+
     const iotexChainID = await web3.eth.net.getId();
     
     const transactionParameters = {
@@ -249,7 +276,14 @@ const BondBalance = (props) => {
     <Row>
         <Col md={5} className="mb-6">
         <ToastContainer className="p-3" position= 'top-start'>
-        <Toast show={showAlert} onClose={toggleShowAlert}>
+        <Toast show={showAlertBalance} onClose={toggleShowAlertBalance}>
+            <Toast.Header>
+            <strong className="me-auto">Notification</strong>
+            </Toast.Header>
+            <Toast.Body>{notif}</Toast.Body>
+        </Toast>
+
+        <Toast show={showAlertField} onClose={toggleShowAlertField} delay={3000} autohide>
             <Toast.Header>
             <strong className="me-auto">Notification</strong>
             </Toast.Header>
@@ -299,33 +333,39 @@ const BondBalance = (props) => {
         <h5 >Fund bond </h5>
 
         <br></br>
+        <Form onSubmit={handleTopUp}>
         <InputGroup className="mb-3">
 
         <Form.Control
+          required
           placeholder="Amount"
-          aria-label="Top-up funds"
-          aria-describedby="top-up bar"
+          type="textarea"
+          name="topUpFunds"
           onChange={handleTopUpValue}
+          
         />
-        <Button onClick={handleTopUp} 
+        <Button type = "submit"
           className="cta-button search-button small btn-space" variant="outline-success" id="button-addon">
           Top-up
         </Button>
       </InputGroup>
+      </Form>
 
+      <Form onSubmit = {handleWithdraw}> 
       <InputGroup className="mb-3">
         <Form.Control
+          required
           placeholder="Amount"
-          aria-label="Withdraw funds"
-          aria-describedby="withdraw bar"
+          type="textarea"
+          name="withdrawFunds"
           onChange={handleWithdrawValue}
         />
-        <Button onClick = {handleWithdraw} 
+        <Button type = "submit"
           className="cta-button search-button small btn-space" variant="outline-secondary" id="button-addon">
           Withdraw
         </Button>
       </InputGroup>
-
+      </Form>
 
 
         </Col>
