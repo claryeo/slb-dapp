@@ -182,12 +182,12 @@ const ReportImpact = (props) => {
         setAverages(valuesArray[valuesArray.length - 3]);
 
         //Filtered device imei
-        setDeviceIMEI(valuesArray[valuesArray.length - 2]);
+        setDeviceIMEI(valuesArray[valuesArray.length - 2][1]);
 
         //Filtered signature
-        setSignature(valuesArray[valuesArray.length - 1]);
+        setSignature(valuesArray[valuesArray.length - 1][1]);
 
-        // console.log(valuesArray[valuesArray.length-1]);
+        console.log(typeof valuesArray[valuesArray.length-1][1]);
       },
     });
   };
@@ -239,8 +239,8 @@ const ReportImpact = (props) => {
     const transactionParameters = {
       to: contractAddress, // Required except during contract publications.
       from: walletAddress, // must match user's active address.
-      data: bondContract.methods.reportImpact(averages[1],averages[2],averages[3]).encodeABI(), 
-        //deviceIMEI, signature).encodeABI(), //consider web3.utils.asciiToHex()
+      data: bondContract.methods.reportImpact(averages[1],averages[2],averages[3],
+        deviceIMEI, signature).encodeABI(), //consider web3.utils.asciiToHex()
       // gasPrice: "1000000000000",
       // gas: "85000",
       chainId: iotexChainID
@@ -260,24 +260,24 @@ const ReportImpact = (props) => {
   }
 
   // TODO: Uncomment when new contract is deployed
-  // const handleRegisterDevice = (async () => {
-  //   const iotexChainID = await web3.eth.net.getId();
+  const handleRegisterDevice = (async () => {
+    const iotexChainID = await web3.eth.net.getId();
 
-  //   const transactionParameters = {
-  //     to: contractAddress, // Required except during contract publications.
-  //     from: walletAddress, // must match user's active address.
-  //     data: bondContract.methods.registerDevice(newDevice).encodeABI(),
-  //     // gasPrice: "1000000000000",
-  //     // gas: "85000",
-  //     chainId: iotexChainID
-  //   };
+    const transactionParameters = {
+      to: contractAddress, // Required except during contract publications.
+      from: walletAddress, // must match user's active address.
+      data: bondContract.methods.registerDevice(newDevice).encodeABI(),
+      // gasPrice: "1000000000000",
+      // gas: "85000",
+      chainId: iotexChainID
+    };
 
-  //   await window.ethereum.request({
-  //     method: "eth_sendTransaction",
-  //     params: [transactionParameters],
-  //   });
+    await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParameters],
+    });
 
-  // })
+  })
 
 
 
@@ -338,7 +338,7 @@ const ReportImpact = (props) => {
         
       <Row>
 
-      <Col xs={4} className="text-center">
+      <Col xs={6} className="text-center">
 
       <img src={device} alt="upload"  width={60} height={60} />
       <br></br>     
@@ -354,7 +354,7 @@ const ReportImpact = (props) => {
         onChange = {handleRegister}
         />
         <Button 
-        // onClick = {handleRegisterDevice} 
+        onClick = {handleRegisterDevice} 
         className="cta-button search-button" variant="outline-success" id="button-addon">
         Register
         </Button>
@@ -368,7 +368,7 @@ const ReportImpact = (props) => {
       <br></br>
       </Col>
 
-      <Col xs={4} className="text-center">
+      <Col xs={6} className="text-center">
       <img src={upload} alt="upload"  width={60} height={60} />
 
       <br></br>     
@@ -379,27 +379,6 @@ const ReportImpact = (props) => {
         <Form.Control type="file" accept=".csv"  onChange={changeHandler}/>
       </Form.Group>
 
-      {/* Table */}
-      <Table striped bordered hover variant = "success">
-        <thead>
-          <tr>
-            {tableRows.map((rows, index) => {
-              return <th key={index}>{rows}</th>;
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {values.map((value, index) => {
-            return (
-              <tr key={index}>
-                {value.map((val, i) => {
-                  return <td key={i}>{val}</td>;
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
 
       <Button onClick={handleReportImpact} className="cta-button search-button btn-space" variant="outline-success" id="button-addon">
         Report impact
@@ -413,7 +392,8 @@ const ReportImpact = (props) => {
       <br></br>
 
       </Col>
-      <Col xs={4} className="text-center">
+
+      <Col xs={6} className="text-center">
     
       <img src={check} alt="check"  width={60} height={60} />
       <br></br>     
@@ -459,6 +439,35 @@ const ReportImpact = (props) => {
     <br></br>
 
     </Col>
+
+      <Col xs={6} className="text-center">
+      <br></br>
+      <div style={{height: 400, overFlowX: 'auto', overflowY : 'auto'}}> 
+      <Table striped bordered hover variant = "success" responsive>
+        <thead>
+          <tr>
+            {tableRows.map((rows, index) => {
+              return <th key={index}>{rows}</th>;
+            })}
+          </tr>
+        </thead>
+        <tbody>
+          {values.map((value, index) => {
+            return (
+              <tr key={index}>
+                {value.map((val, i) => {
+                  return <td key={i}>{val}</td>;
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
+      </div>
+
+      <br></br>
+      <br></br>
+      </Col>
 
 
     

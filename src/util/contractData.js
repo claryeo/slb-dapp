@@ -1,5 +1,5 @@
     export const contractData = [
-        {address: "0xF6d96E1ad136fbC02Ed357A4883447cA48F0E742",
+        {address: "0xcA7b34AB047d1b22e811F7793a359bAc0f805437",
         abi: [
             {
                 "inputs": [],
@@ -156,6 +156,25 @@
                     }
                 ],
                 "name": "Paused",
+                "type": "event"
+            },
+            {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": false,
+                        "internalType": "string",
+                        "name": "imei",
+                        "type": "string"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "address",
+                        "name": "owner",
+                        "type": "address"
+                    }
+                ],
+                "name": "RegisteredDevice",
                 "type": "event"
             },
             {
@@ -327,6 +346,30 @@
             {
                 "inputs": [
                     {
+                        "internalType": "string",
+                        "name": "_imei",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "bytes32",
+                        "name": "_signature",
+                        "type": "bytes32"
+                    }
+                ],
+                "name": "checkDevice",
+                "outputs": [
+                    {
+                        "internalType": "bool",
+                        "name": "",
+                        "type": "bool"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
                         "internalType": "uint256",
                         "name": "_claimPeriod",
                         "type": "uint256"
@@ -468,6 +511,25 @@
                 "type": "function"
             },
             {
+                "inputs": [
+                    {
+                        "internalType": "string",
+                        "name": "_imei",
+                        "type": "string"
+                    }
+                ],
+                "name": "findDeviceOwner",
+                "outputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
                 "inputs": [],
                 "name": "freezeBond",
                 "outputs": [],
@@ -524,6 +586,30 @@
                     }
                 ],
                 "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "string",
+                        "name": "_imei",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "_addr",
+                        "type": "address"
+                    }
+                ],
+                "name": "hash",
+                "outputs": [
+                    {
+                        "internalType": "bytes32",
+                        "name": "",
+                        "type": "bytes32"
+                    }
+                ],
+                "stateMutability": "pure",
                 "type": "function"
             },
             {
@@ -721,6 +807,19 @@
                 "type": "function"
             },
             {
+                "inputs": [
+                    {
+                        "internalType": "string",
+                        "name": "_imei",
+                        "type": "string"
+                    }
+                ],
+                "name": "registerDevice",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
                 "inputs": [],
                 "name": "renounceOwnership",
                 "outputs": [],
@@ -743,6 +842,16 @@
                         "internalType": "uint256",
                         "name": "_impactData_3",
                         "type": "uint256"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "_imei",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "bytes32",
+                        "name": "_signature",
+                        "type": "bytes32"
                     }
                 ],
                 "name": "reportImpact",
@@ -940,7 +1049,7 @@
             }
         ]
         },{
-            address: "0x0aE5dD76125d6019Bd63f20E8EA735523f3a06f3",
+            address: "0x8Bd48A9AB319b4ce6959b24409a95c6F432F744e",
             abi:[
                 {
                     "inputs": [],
@@ -1097,6 +1206,25 @@
                         }
                     ],
                     "name": "Paused",
+                    "type": "event"
+                },
+                {
+                    "anonymous": false,
+                    "inputs": [
+                        {
+                            "indexed": false,
+                            "internalType": "string",
+                            "name": "imei",
+                            "type": "string"
+                        },
+                        {
+                            "indexed": false,
+                            "internalType": "address",
+                            "name": "owner",
+                            "type": "address"
+                        }
+                    ],
+                    "name": "RegisteredDevice",
                     "type": "event"
                 },
                 {
@@ -1268,6 +1396,30 @@
                 {
                     "inputs": [
                         {
+                            "internalType": "string",
+                            "name": "_imei",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "bytes32",
+                            "name": "_signature",
+                            "type": "bytes32"
+                        }
+                    ],
+                    "name": "checkDevice",
+                    "outputs": [
+                        {
+                            "internalType": "bool",
+                            "name": "",
+                            "type": "bool"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
                             "internalType": "uint256",
                             "name": "_claimPeriod",
                             "type": "uint256"
@@ -1409,6 +1561,25 @@
                     "type": "function"
                 },
                 {
+                    "inputs": [
+                        {
+                            "internalType": "string",
+                            "name": "_imei",
+                            "type": "string"
+                        }
+                    ],
+                    "name": "findDeviceOwner",
+                    "outputs": [
+                        {
+                            "internalType": "address",
+                            "name": "",
+                            "type": "address"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
                     "inputs": [],
                     "name": "freezeBond",
                     "outputs": [],
@@ -1465,6 +1636,30 @@
                         }
                     ],
                     "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "string",
+                            "name": "_imei",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "_addr",
+                            "type": "address"
+                        }
+                    ],
+                    "name": "hash",
+                    "outputs": [
+                        {
+                            "internalType": "bytes32",
+                            "name": "",
+                            "type": "bytes32"
+                        }
+                    ],
+                    "stateMutability": "pure",
                     "type": "function"
                 },
                 {
@@ -1662,6 +1857,19 @@
                     "type": "function"
                 },
                 {
+                    "inputs": [
+                        {
+                            "internalType": "string",
+                            "name": "_imei",
+                            "type": "string"
+                        }
+                    ],
+                    "name": "registerDevice",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
                     "inputs": [],
                     "name": "renounceOwnership",
                     "outputs": [],
@@ -1684,6 +1892,16 @@
                             "internalType": "uint256",
                             "name": "_impactData_3",
                             "type": "uint256"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "_imei",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "bytes32",
+                            "name": "_signature",
+                            "type": "bytes32"
                         }
                     ],
                     "name": "reportImpact",

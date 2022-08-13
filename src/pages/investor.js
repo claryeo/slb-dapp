@@ -60,7 +60,7 @@ const Investor = () => {
 
             var percentageBondsPurchased = (totalPurchasedBonds/totalBonds) * 100;
 
-            if(totalBonds === 0){
+            if(totalBonds === '0'){
               percentageBondsPurchased = 0;
             }
 
