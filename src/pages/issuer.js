@@ -2,12 +2,9 @@ import React, { useEffect } from "react";
 import {useState} from 'react';
 import { useNavigate } from "react-router-dom";
 
-import Button from 'react-bootstrap/Button';
-import Toast from 'react-bootstrap/Toast';
-import ToastContainer from 'react-bootstrap/ToastContainer';
+// import Toast from 'react-bootstrap/Toast';
+// import ToastContainer from 'react-bootstrap/ToastContainer';
 import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
@@ -35,19 +32,19 @@ const Issuer = () => {
     const bondDetails = [];
 
     const handleBondStatus = (status, suspend) => {
-      if(suspend == true){
+      if(suspend === true){
         return 'SUSPENDED ⚫';
       }
-      else if (status == '0'){
+      else if (status === '0'){
         return 'PRE-ISSUE ⚪';
       }
-      else if(status == '1'){
+      else if(status === '1'){
         return 'ISSUED 🟡';
       }
-      else if(status == '2'){
+      else if(status === '2'){
         return 'ACTIVE 🟢';
       }
-      else if(status == '3'){
+      else if(status === '3'){
         return 'BANKRUPT 🔴';
       }
       else{
@@ -66,7 +63,7 @@ const Issuer = () => {
 
           var percentageBondsPurchased = (totalPurchasedBonds/totalBonds) * 100;
 
-          if(totalBonds == 0){
+          if(totalBonds === 0){
             percentageBondsPurchased = 0;
           }
 
@@ -93,7 +90,7 @@ const Issuer = () => {
     // const [isIssuer, setIssuer] = useState(false);
 
     useEffect(() => {
-        contractData.map((d) => {
+        contractData.forEach((d) => {
             contractDataArray.push(Object.values(d));
         });
     
@@ -127,9 +124,9 @@ const Issuer = () => {
       }
     }
 
-    function print(){
-        console.log(bondObjects[0].address);
-    }
+    // function print(){
+    //     console.log(bondObjects[0].address);
+    // }
 
     // function printBondID(){
     //     console.log(selectedBond);
@@ -152,6 +149,7 @@ const Issuer = () => {
                 navigateImpact();
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedBondAddress, selectedBondABI, selectedAction])
 
     const handleClickBalance = (id) => {

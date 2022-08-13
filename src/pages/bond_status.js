@@ -4,8 +4,8 @@ import {useState, useEffect } from 'react';
 import Web3 from 'web3';
 
 import Button from 'react-bootstrap/Button';
-import Toast from 'react-bootstrap/Toast';
-import ToastContainer from 'react-bootstrap/ToastContainer';
+// import Toast from 'react-bootstrap/Toast';
+// import ToastContainer from 'react-bootstrap/ToastContainer';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -16,7 +16,7 @@ import {IssuerButton} from '../components/BackButton';
 import setting from '../assets/tools.svg';
 import timing from '../assets/time.svg'
 
-const Bond_Status = (props) => {
+const BondStatus = (props) => {
 
   const location = useLocation();
 
@@ -24,10 +24,10 @@ const Bond_Status = (props) => {
   const [walletAddress, setWallet] = useState("");
   const [status, setStatus] = useState("");
 
-  const [showAlert, setShowAlert] = useState(false);
-  const toggleShowAlert = () => setShowAlert(!showAlert);
+  // const [showAlert, setShowAlert] = useState(false);
+  // const toggleShowAlert = () => setShowAlert(!showAlert);
 
-  const [notif, setNotif] = useState(" "); 
+  // const [notif, setNotif] = useState(" "); 
 
   const [message, setMessage] = useState(" "); //default message
 
@@ -73,19 +73,19 @@ const Bond_Status = (props) => {
 
   
   const handleBondStatus = () => {
-    if(message[7] == true){
+    if(message[7] === true){
       return 'SUSPENDED ⚫';
     }
-    if(message[1] == '0'){
+    if(message[1] === '0'){
       return 'PRE-ISSUE ⚪';
     }
-    else if(message[1] == '1'){
+    else if(message[1] === '1'){
       return 'ISSUED 🟡';
     }
-    else if(message[1] == '2'){
+    else if(message[1] === '2'){
       return 'ACTIVE 🟢';
     }
-    else if(message[1] == '3'){
+    else if(message[1] === '3'){
       return 'BANKRUPT 🔴';
     }
     else{
@@ -259,7 +259,7 @@ const Bond_Status = (props) => {
 };
   
 
-export default Bond_Status;
+export default BondStatus;
 
   
   

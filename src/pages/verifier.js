@@ -1,13 +1,10 @@
 import React, { useEffect } from "react";
 import {useState} from 'react';
-import { useNavigate } from "react-router-dom";
 
 import Button from 'react-bootstrap/Button';
-import Toast from 'react-bootstrap/Toast';
-import ToastContainer from 'react-bootstrap/ToastContainer';
+// import Toast from 'react-bootstrap/Toast';
+// import ToastContainer from 'react-bootstrap/ToastContainer';
 import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
@@ -26,7 +23,6 @@ import {contractData} from "../util/contractData"
 import Web3 from 'web3';
 
 const Verifier = () => {
-    const navigate = useNavigate();
   
     const [isConnected, setConnected] = useState(false);
     const [walletAddress, setWallet] = useState("");
@@ -38,19 +34,19 @@ const Verifier = () => {
     const bondDetails = [];
 
     const handleBondStatus = (status, suspend) => {
-      if(suspend == true){
+      if(suspend === true){
         return 'SUSPENDED ⚫';
       }
-      else if (status == '0'){
+      else if (status === '0'){
         return 'PRE-ISSUE ⚪';
       }
-      else if(status == '1'){
+      else if(status === '1'){
         return 'ISSUED 🟡';
       }
-      else if(status == '2'){
+      else if(status === '2'){
         return 'ACTIVE 🟢';
       }
-      else if(status == '3'){
+      else if(status === '3'){
         return 'BANKRUPT 🔴';
       }
       else{
@@ -84,7 +80,7 @@ const Verifier = () => {
     const [selectedAction, setAction] = useState("");
 
     useEffect(() => {
-        contractData.map((d) => {
+        contractData.forEach((d) => {
             contractDataArray.push(Object.values(d));
         });
     
@@ -118,9 +114,9 @@ const Verifier = () => {
       }
     }
 
-    function print(){
-        console.log(bondObjects[0].is_verified);
-    }
+    // function print(){
+    //     console.log(bondObjects[0].is_verified);
+    // }
 
     // function printBondID(){
     //     console.log(selectedBond);
@@ -143,6 +139,7 @@ const Verifier = () => {
                 didNotMeetKPIs(bondContract);
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedBondAddress, selectedBondABI, selectedAction])
 
 
@@ -159,7 +156,7 @@ const Verifier = () => {
     }
 
     const handleClickFile = () => {
-      if(fileID != ''){
+      if(fileID !== ''){
       const url = `https://dweb.link/ipfs/${fileID}`;
       window.open(url, '_blank', 'noopener,noreferrer');
       // showMessage(<span>&gt; 🔗 <a href={url}>{url}</a></span>)
@@ -223,7 +220,7 @@ const Verifier = () => {
     })
 
     const checkInput = () => {
-      if(fileID == ''){
+      if(fileID === ''){
         return false;
       }
       else{

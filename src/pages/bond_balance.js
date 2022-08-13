@@ -21,7 +21,7 @@ import wallet from '../assets/wallet-money.svg';
 import clipboard from '../assets/clipboard-list.svg'
 import {IssuerButton} from '../components/BackButton';
 
-const Bond_Balance = (props) => {
+const BondBalance = (props) => {
 
   const location = useLocation();
 
@@ -71,7 +71,7 @@ const Bond_Balance = (props) => {
     message[10] = await bondContract.methods.isVerified().call();
     message[11] = web3.utils.fromWei(await bondContract.methods.bondPrice().call());
 
-    if(message[7] != '0'){
+    if(message[7] !== '0'){
       setBondsPurchased((message[5]/message[6]) * 100);
     }
     setMinBalance((parseFloat(message[2]) + parseFloat(message[3])) * parseFloat(message[4]));
@@ -79,11 +79,11 @@ const Bond_Balance = (props) => {
     //TODO: get metKPIs to calculate current period interest wrt penalty - DONE
     let arrayLength = 0;
 
-    if(parseInt(message[8]) > 0 && message[10] == true){
+    if(parseInt(message[8]) > 0 && message[10] === true){
       arrayLength = parseInt(message[8]);
       message.push(await bondContract.methods.metKPIs(arrayLength-1).call());
     }
-    else if (parseInt(message[8]) > 0 && message[10] == false){
+    else if (parseInt(message[8]) > 0 && message[10] === false){
       arrayLength = parseInt(message[8]) - 1;
       if(arrayLength > 0){
         message.push(await bondContract.methods.metKPIs(arrayLength-1).call());
@@ -110,7 +110,7 @@ const Bond_Balance = (props) => {
       setMessage(message); 
       setBondBalance(parseFloat(message[1]));
       // KPI is set to coupon rate at first (before impact data is received and verified)
-      if(parseInt(message[8]) > 0 && message[10] == true){
+      if(parseInt(message[8]) > 0 && message[10] === true){
         setKPI(message[12]);
       }
     }
@@ -132,19 +132,19 @@ const Bond_Balance = (props) => {
   let formatValue = (bondBalance) => bondBalance.toFixed(5);
     
   const handleBondStatus = () => {
-    if(message[9] == true){
+    if(message[9] === true){
       return 'SUSPENDED ⚫';
     }
-    else if(message[7] == '0'){
+    else if(message[7] === '0'){
       return 'PRE-ISSUE ⚪';
     }
-    else if(message[7] == '1'){
+    else if(message[7] === '1'){
       return 'ISSUED 🟡';
     }
-    else if(message[7] == '2'){
+    else if(message[7] === '2'){
       return 'ACTIVE 🟢';
     }
-    else if(message[7] == '3'){
+    else if(message[7] === '3'){
       return 'BANKRUPT 🔴';
     }
     else{
@@ -170,6 +170,7 @@ const Bond_Balance = (props) => {
       // console.log(minBalance);
       handleBalance();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [minBalance]);
 
 
@@ -371,7 +372,7 @@ const Bond_Balance = (props) => {
 };
   
 
-export default Bond_Balance;
+export default BondBalance;
 
   
   

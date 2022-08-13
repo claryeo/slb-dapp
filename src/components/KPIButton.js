@@ -1,8 +1,6 @@
 import React from "react";
 
 import { FaTimesCircle, FaCheckCircle } from "react-icons/fa";
-import Button from 'react-bootstrap/Button';
-
 
 export const KPIButtonGood = () => {
 return(

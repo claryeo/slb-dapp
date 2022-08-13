@@ -1,11 +1,11 @@
 import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import {useState, useEffect } from 'react';
 import Web3 from 'web3';
 
 import Button from 'react-bootstrap/Button';
-import Toast from 'react-bootstrap/Toast';
-import ToastContainer from 'react-bootstrap/ToastContainer';
+// import Toast from 'react-bootstrap/Toast';
+// import ToastContainer from 'react-bootstrap/ToastContainer';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -21,9 +21,7 @@ import {KPIButtonGood, KPIButtonBad} from '../components/KPIButton';
 import bar from '../assets/bar.png';
 
 
-const Regulator_Search = (props) => {
-
-  const navigate = useNavigate();
+const RegulatorSearch = (props) => {
 
   const location = useLocation();
 
@@ -71,13 +69,13 @@ const Regulator_Search = (props) => {
 
     let arrayLength = 0;
 
-    if(parseInt(message[13]) > 0 && message[15] == true){
+    if(parseInt(message[13]) > 0 && message[15] === true){
       arrayLength = parseInt(message[13]);
       for (let i = 0; i < arrayLength; i++){
         message.push(await bondContract.methods.metKPIs(i).call());
       } 
     }
-    else if (parseInt(message[13]) > 0 && message[16] == false){
+    else if (parseInt(message[13]) > 0 && message[16] === false){
       arrayLength = parseInt(message[13]) - 1;
       for (let i = 0; i < arrayLength; i++){
         message.push(await bondContract.methods.metKPIs(i).call());
@@ -116,7 +114,7 @@ const Regulator_Search = (props) => {
   });
 
   const handleBondStatus = () => {
-    if(message[14] == true){
+    if(message[14] === true){
       return 'SUSPENDED ⚫';
     }
     else if(message[11] === '0'){
@@ -137,15 +135,6 @@ const Regulator_Search = (props) => {
   }
   
   let bondStatus = handleBondStatus();
-  const bondPrice = parseInt(message[4]);
-
-  const [numberOfBonds, setBonds] = useState('');
-
-  const handleBonds = event => {
-    // 👇️ access textarea value
-    setBonds(event.target.value);
-  };
-
   
   const handleFreeze = (async () => {
     const iotexChainID = await web3.eth.net.getId();
@@ -380,7 +369,7 @@ const Regulator_Search = (props) => {
 };
   
 
-export default Regulator_Search;
+export default RegulatorSearch;
 
   
   

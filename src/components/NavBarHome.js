@@ -25,6 +25,7 @@ const NavBarMain = ({isConnected, setConnected, walletAddress, setWallet, status
       };
 
       fetchData();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function addWalletListener() { //TODO: from tutorial
@@ -45,7 +46,7 @@ const NavBarMain = ({isConnected, setConnected, walletAddress, setWallet, status
             <p>
               {" "}
               🦊{" "}
-              <a target="_blank" href={`https://metamask.io/download.html`}>
+              <a target="_blank" rel="noreferrer" href={`https://metamask.io/download.html`}>
                 You must install Metamask, a virtual Ethereum wallet, in your
                 browser.
               </a>

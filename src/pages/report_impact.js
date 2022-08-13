@@ -26,7 +26,7 @@ import bar from '../assets/bar.png';
 import web3StorageToken from '../util/web3StorageToken';
 
 
-const Report_Impact = (props) => {
+const ReportImpact = (props) => {
 
   const location = useLocation();
 
@@ -72,13 +72,13 @@ const Report_Impact = (props) => {
 
     let arrayLength = 0;
 
-    if(parseInt(message[6]) > 0 && message[8] == true){
+    if(parseInt(message[6]) > 0 && message[8] === true){
       arrayLength = parseInt(message[6]);
       for (let i = 0; i < arrayLength; i++){
         message.push(await bondContract.methods.metKPIs(i).call());
       } 
     }
-    else if (parseInt(message[6]) > 0 && message[8] == false){
+    else if (parseInt(message[6]) > 0 && message[8] === false){
       arrayLength = parseInt(message[6]) - 1;
       for (let i = 0; i < arrayLength; i++){
         message.push(await bondContract.methods.metKPIs(i).call());
@@ -107,19 +107,19 @@ const Report_Impact = (props) => {
 
   
   const handleBondStatus = () => {
-    if(message[7] == true){
+    if(message[7] === true){
       return 'SUSPENDED ⚫';
     }
-    else if(message[1] == '0'){
+    else if(message[1] === '0'){
       return 'PRE-ISSUE ⚪';
     }
-    else if(message[1] == '1'){
+    else if(message[1] === '1'){
       return 'ISSUED 🟡';
     }
-    else if(message[1] == '2'){
+    else if(message[1] === '2'){
       return 'ACTIVE 🟢';
     }
-    else if(message[1] == '3'){
+    else if(message[1] === '3'){
       return 'BANKRUPT 🔴';
     }
     else{
@@ -143,6 +143,12 @@ const Report_Impact = (props) => {
   //Updated: State to store KPI averages
   const [averages, setAverages] = useState([]);
 
+  //Updated: State to store device imei
+  const [deviceIMEI, setDeviceIMEI] = useState("");
+
+  //Updated: State to store signature
+  const [signature, setSignature] = useState("");
+
   //Updated: Set Files - HAS TO BE AN ARRAY OF FILES
   const [file, setFile] = useState([]);
 
@@ -158,7 +164,7 @@ const Report_Impact = (props) => {
         const valuesArray = [];
 
         // Iterating data to get column name and their values
-        results.data.map((d) => {
+        results.data.forEach((d) => {
           rowsArray.push(Object.keys(d));
           valuesArray.push(Object.values(d));
         });
@@ -173,9 +179,15 @@ const Report_Impact = (props) => {
         setValues(valuesArray);
         
         //Filtered averages
-        setAverages(valuesArray[valuesArray.length-1]);
+        setAverages(valuesArray[valuesArray.length - 3]);
 
-        console.log(valuesArray[valuesArray.length-1]);
+        //Filtered device imei
+        setDeviceIMEI(valuesArray[valuesArray.length - 2]);
+
+        //Filtered signature
+        setSignature(valuesArray[valuesArray.length - 1]);
+
+        // console.log(valuesArray[valuesArray.length-1]);
       },
     });
   };
@@ -219,6 +231,7 @@ const Report_Impact = (props) => {
     showMessage(<span>&gt; 🔗 <a href={url}>{url}</a></span>)
   }
 
+  // TODO: Uncomment when new contract is deployed
 
   const handleReportImpact = (async () => {
     const iotexChainID = await web3.eth.net.getId();
@@ -226,7 +239,8 @@ const Report_Impact = (props) => {
     const transactionParameters = {
       to: contractAddress, // Required except during contract publications.
       from: walletAddress, // must match user's active address.
-      data: bondContract.methods.reportImpact(averages[1],averages[2],averages[3]).encodeABI(),
+      data: bondContract.methods.reportImpact(averages[1],averages[2],averages[3]).encodeABI(), 
+        //deviceIMEI, signature).encodeABI(), //consider web3.utils.asciiToHex()
       // gasPrice: "1000000000000",
       // gas: "85000",
       chainId: iotexChainID
@@ -238,6 +252,32 @@ const Report_Impact = (props) => {
     });
 
   })
+
+  const [newDevice, setNewDevice] = useState(""); 
+
+  const handleRegister = event => {
+    setNewDevice(event.target.value);
+  }
+
+  // TODO: Uncomment when new contract is deployed
+  // const handleRegisterDevice = (async () => {
+  //   const iotexChainID = await web3.eth.net.getId();
+
+  //   const transactionParameters = {
+  //     to: contractAddress, // Required except during contract publications.
+  //     from: walletAddress, // must match user's active address.
+  //     data: bondContract.methods.registerDevice(newDevice).encodeABI(),
+  //     // gasPrice: "1000000000000",
+  //     // gas: "85000",
+  //     chainId: iotexChainID
+  //   };
+
+  //   await window.ethereum.request({
+  //     method: "eth_sendTransaction",
+  //     params: [transactionParameters],
+  //   });
+
+  // })
 
 
 
@@ -311,7 +351,7 @@ const Report_Impact = (props) => {
         placeholder="Device ID"
         aria-label="Register device"
         aria-describedby="register device bar"
-        // onChange = {handleRegister}
+        onChange = {handleRegister}
         />
         <Button 
         // onClick = {handleRegisterDevice} 
@@ -383,17 +423,13 @@ const Report_Impact = (props) => {
 
 
       <p> ⬅             Progress bar       ➡</p>
-      {/* CHECK BUTTON NESTING HERE */}
-      {/* <ol className="text-center"> */}
       {KPIs.map((item, index) => (
         <Button key = {index} variant = "outline">
-          {/* {item.toString()} */}
         {item ? <KPIButtonGood/> : <KPIButtonBad/>}
         </Button>
       ))}
-      {/* </ol> */}
       
-        <br></br>
+      <br></br>
 
     <img src={bar} alt="bar"  width={400} height={65}/>
     <br></br>
@@ -440,7 +476,7 @@ const Report_Impact = (props) => {
 };
   
 
-export default Report_Impact;
+export default ReportImpact;
 
   
   

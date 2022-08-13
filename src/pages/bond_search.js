@@ -4,8 +4,8 @@ import {useState, useEffect } from 'react';
 import Web3 from 'web3';
 
 import Button from 'react-bootstrap/Button';
-import Toast from 'react-bootstrap/Toast';
-import ToastContainer from 'react-bootstrap/ToastContainer';
+// import Toast from 'react-bootstrap/Toast';
+// import ToastContainer from 'react-bootstrap/ToastContainer';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -22,7 +22,7 @@ import tools from '../assets/pay-click.svg';
 import {KPIButtonGood, KPIButtonBad} from '../components/KPIButton';
 import bar from '../assets/bar.png';
 
-const Bond_Search = (props) => {
+const BondSearch = (props) => {
 
   const location = useLocation();
 
@@ -77,13 +77,13 @@ const Bond_Search = (props) => {
 
     let arrayLength = 0;
 
-    if(parseInt(message[14]) > 0 && message[16] == 'true'){
+    if(parseInt(message[14]) > 0 && message[16] === 'true'){
       arrayLength = parseInt(message[14]);
       for (let i = 0; i < arrayLength; i++){
         message.push(await bondContract.methods.metKPIs(i).call());
       } 
     }
-    else if (parseInt(message[14]) > 0 && message[16] == 'false'){
+    else if (parseInt(message[14]) > 0 && message[16] === 'false'){
       arrayLength = parseInt(message[14]) - 1;
       for (let i = 0; i < arrayLength; i++){
         message.push(await bondContract.methods.metKPIs(i).call());
@@ -119,13 +119,13 @@ const Bond_Search = (props) => {
     }
 
     // To resolve async error when walletAddress is not set
-    if(walletAddress != ""){
+    if(walletAddress !== ""){
       getMessage();
     }
   });
 
   const handleBondStatus = () => {
-    if(message[15] == true){
+    if(message[15] === true){
       return 'SUSPENDED ⚫';
     }
     else if(message[11] === '0'){
@@ -489,7 +489,7 @@ const Bond_Search = (props) => {
 };
   
 
-export default Bond_Search;
+export default BondSearch;
 
   
   

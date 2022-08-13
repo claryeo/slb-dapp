@@ -4,8 +4,8 @@ import {useState} from 'react';
 import Web3 from 'web3';
 
 import Button from 'react-bootstrap/Button';
-import Toast from 'react-bootstrap/Toast';
-import ToastContainer from 'react-bootstrap/ToastContainer';
+// import Toast from 'react-bootstrap/Toast';
+// import ToastContainer from 'react-bootstrap/ToastContainer';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -16,7 +16,7 @@ import {IssuerButton} from '../components/BackButton';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
-const Bond_Issue = (props) => {
+const BondIssue = (props) => {
 
   const location = useLocation();
 
@@ -24,12 +24,12 @@ const Bond_Issue = (props) => {
   const [walletAddress, setWallet] = useState("");
   const [status, setStatus] = useState("");
 
-  const [showAlert, setShowAlert] = useState(false);
-  const toggleShowAlert = () => setShowAlert(!showAlert);
+  // const [showAlert, setShowAlert] = useState(false);
+  // const toggleShowAlert = () => setShowAlert(!showAlert);
 
-  const [notif, setNotif] = useState(" "); 
+  // const [notif, setNotif] = useState(" "); 
 
-  const [message, setMessage] = useState(" "); //default message
+  // const [message, setMessage] = useState(" "); //default message
 
   const web3 = new Web3(new Web3.providers.HttpProvider("https://babel-api.testnet.iotex.io"));
 
@@ -96,16 +96,16 @@ const Bond_Issue = (props) => {
   // }
 
   const convertToKPI = (value) =>{
-    if(value == "None"){
+    if(value === "None"){
       return 0;
     }
-    else if(value == "Greenhouse gas emissions (CO2)"){
+    else if(value === "Greenhouse gas emissions (CO2)"){
       return 1;
     }
-    else if(value == "Volume of recycled materials"){
+    else if(value === "Volume of recycled materials"){
       return 2;
     }
-    else if(value == "Social indicator"){
+    else if(value === "Social indicator"){
       return 3;
     }
     else{
@@ -403,7 +403,7 @@ const Bond_Issue = (props) => {
 };
   
 
-export default Bond_Issue;
+export default BondIssue;
 
   
   
