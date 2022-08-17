@@ -222,6 +222,10 @@ const RegulatorSearch = (props) => {
       </thead>
       <tbody>
         <tr>
+          <td>Contract address</td>
+          <td>{contractAddress}</td>
+        </tr>
+        <tr>
           <td>Issuer</td>
           <td>{message[1]}</td>
         </tr>
