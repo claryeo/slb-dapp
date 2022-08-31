@@ -6,15 +6,17 @@ Link to smart contract repository: https://github.com/claryeo/slb-contracts.
 
 ## Summary
 
-The SLB dApp is a bonds-as-a-service platform for SLB market participants. The SLB dApp utilises the synergistic benefits of blockchain, digital twin and IoT technology to create an end-to-end digital solution for activity across the SLB lifecycle.
+The SLB dApp is a bonds-as-a-service platform for SLB market participants. It utilises the synergistic benefits of blockchain, digital twin and IoT technology to create an end-to-end digital solution for activity across the SLB lifecycle.
 
 The primary user roles are: (1) Investor, (2) Issuer, (3) Verifier, (4) Regulator.
+
+UML state machine diagram: 
 
 ![UML state machine](./img/uml_state_machine.png)
 
 ## Setup
 
-- Requirements: Node >= [14.0.0](https://nodejs.org/en/) and npm >= 5.6
+- **Requirements**: Node >= [14.0.0](https://nodejs.org/en/) and npm >= 5.6
 - Download and clone the repository.
 - Run `npm start`
 
