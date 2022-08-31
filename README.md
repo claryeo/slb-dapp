@@ -1,6 +1,20 @@
-# Getting Started with Create React App
+SLB-dApp
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Link to smart contract repository: https://github.com/claryeo/slb-contracts.
+
+## Summary
+
+The SLB dApp is a bonds-as-a-service platform for SLB market participants. The SLB dApp utilises the synergistic benefits of blockchain, digital twin and IoT technology to create an end-to-end digital solution for activity across the SLB lifecycle.
+
+The primary user roles are: (1) Investor, (2) Issuer, (3) Verifier, (4) Regulator.
+
+## Setup
+
+- Requirements: Node >= [14.0.0](https://nodejs.org/en/) and npm >= 5.6
+- Download and clone the repository.
+- Run `npm start`
+
 
 ## Available Scripts
 
@@ -39,13 +53,10 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+<!-- ### Code Splitting
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
@@ -67,4 +78,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 ### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
