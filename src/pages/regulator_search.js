@@ -238,7 +238,7 @@ const RegulatorSearch = (props) => {
           <td>{message[3]}</td>
         </tr>
         <tr>
-          <td>Bond Price (IOTX)</td>
+          <td>Bond Price per unit(IOTX)</td>
           <td>{message[4]}</td>
         </tr>
         <tr>
@@ -250,7 +250,7 @@ const RegulatorSearch = (props) => {
           <td>{message[6]}</td>
         </tr>
         <tr>
-          <td>Total bonds issued</td>
+          <td>Total Bond units issued</td>
           <td>{message[7]}</td>
         </tr>
         <tr>

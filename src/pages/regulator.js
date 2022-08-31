@@ -96,6 +96,7 @@ const Regulator = () => {
     const [isRegulator, setRegulator] = useState(false);
 
     const checkRegulator = async(id) => {
+      setRegulator(false);
       const addressArray = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
@@ -109,14 +110,6 @@ const Regulator = () => {
       }
     }
 
-    // function print(){
-    //     console.log(bondObjects[0].address);
-    // }
-
-    // function printBondID(){
-    //     console.log(selectedBond);
-    // }
-    
     useEffect(() => {
         if(selectedBondAddress.length > 0 && selectedBondABI.length > 0){
             console.log(selectedBondAddress);
@@ -125,20 +118,6 @@ const Regulator = () => {
         }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedBondAddress, selectedBondABI])
-
-    // const handleClickFreeze = (id) => {
-    //     setSelectedBondAddress(contractArray[id-1]._address);
-    //     setSelectedBondABI(contractArray[id-1]._jsonInterface);
-    //     setAction("freeze");
-    // }
-
-    // //set freeze/unfreeze functions
-    
-    // const handleClickUnfreeze = (id) => {
-    //     setSelectedBondAddress(contractArray[id-1]._address);
-    //     setSelectedBondABI(contractArray[id-1]._jsonInterface);
-    //     setAction("unfreeze");
-    // }
 
     const handleClickView = (id) => {
         setSelectedBondAddress(contractArray[id-1]._address);
@@ -180,7 +159,8 @@ const Regulator = () => {
           <Container>
           <br></br>
     
-            <Table striped bordered hover variant = "success">
+          <div style={{height: 465, overFlowX: 'auto', overflowY : 'auto'}}> 
+            <Table striped bordered hover variant = "success" responsive>
             <thead>
             <tr>
             <th>ID</th>
@@ -216,8 +196,7 @@ const Regulator = () => {
             </tbody> 
 
             </Table>
-
-            {/* <td><Button onClick={printBondID}> test </Button></td> */}
+            </div>
 
             </Container>
 

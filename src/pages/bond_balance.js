@@ -379,10 +379,10 @@ const BondBalance = (props) => {
         <Card className="text-start">
         {/* <Card.Header>Total debt</Card.Header> */}
         <ListGroup variant="flush">
-          <ListGroup.Item>Percentage of bonds sold: 
+          <ListGroup.Item>Percentage of bond units sold: 
             <ProgressBar variant="success" now={bondsPurchased} label={`${bondsPurchased}%`} /> </ListGroup.Item>
 
-          <ListGroup.Item>Total bonds issued: {message[6]}</ListGroup.Item>
+          <ListGroup.Item>Total bond units issued: {message[6]}</ListGroup.Item>
           
           <ListGroup.Item>Total debt (IOTX): {message[4]}</ListGroup.Item>
 

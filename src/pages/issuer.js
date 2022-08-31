@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import {useState} from 'react';
 import { useNavigate } from "react-router-dom";
 
-// import Toast from 'react-bootstrap/Toast';
-// import ToastContainer from 'react-bootstrap/ToastContainer';
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -52,6 +50,12 @@ const Issuer = () => {
       }
     }
 
+    // const format = (desc) => {
+    //   let descItems = "";
+    //   descItems = desc.toString().split(",").join("\n");
+    //   return descItems;
+    // }
+
 
     const loadBondDetails = async () => {
       
@@ -87,7 +91,6 @@ const Issuer = () => {
     const [selectedBondAddress, setSelectedBondAddress] = useState("");
     const [selectedBondABI, setSelectedBondABI] = useState("");
     const [selectedAction, setAction] = useState("");
-    // const [isIssuer, setIssuer] = useState(false);
 
     useEffect(() => {
         contractData.forEach((d) => {
@@ -106,11 +109,12 @@ const Issuer = () => {
         }
         getBonds();
         
-    }); //should not have callback here
+    }); 
 
     const [isIssuer, setIssuer] = useState(false);
 
     const checkIssuer = async(id) => {
+      setIssuer(false);
       const addressArray = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
@@ -123,14 +127,6 @@ const Issuer = () => {
         setIssuer(true);
       }
     }
-
-    // function print(){
-    //     console.log(bondObjects[0].address);
-    // }
-
-    // function printBondID(){
-    //     console.log(selectedBond);
-    // }
     
     useEffect(() => {
         if(selectedBondAddress.length > 0 && selectedBondABI.length > 0){
@@ -224,15 +220,16 @@ const Issuer = () => {
           <Container>
           <br></br>
     
-            <Table striped bordered hover variant = "success">
+          <div style={{height: 465, overFlowX: 'auto', overflowY : 'auto'}}> 
+            <Table striped bordered hover variant = "success" responsive>
             <thead>
             <tr>
             <th>ID</th>
             {/* <th>Address</th> */}
             <th>Description</th>
             <th>Bond state</th>
-            <th>Bonds purchased (%)</th>
-            <th>Bond price (IOTX)</th>
+            <th>Bond units purchased (%)</th>
+            <th>Bond price per unit (IOTX)</th>
             <th>Coupon (IOTX)</th>
             <th>Action</th>
             </tr>
@@ -265,8 +262,7 @@ const Issuer = () => {
             </tbody> 
 
             </Table>
-
-            {/* <td><Button onClick={printBondID}> test </Button></td> */}
+            </div>
 
             </Container>
 

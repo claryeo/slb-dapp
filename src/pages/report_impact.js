@@ -37,10 +37,10 @@ const ReportImpact = (props) => {
   const [showAlert, setShowAlert] = useState(false);
   const toggleShowAlert = () => setShowAlert(!showAlert);
 
-  const [showAlertField, setShowAlertField] = useState(false);
-  const toggleShowAlertField = () => setShowAlertField(!showAlertField);
+  // const [showAlertField, setShowAlertField] = useState(false);
+  // const toggleShowAlertField = () => setShowAlertField(!showAlertField);
 
-  const [notif, setNotif] = useState(" "); 
+  // const [notif, setNotif] = useState(" "); 
 
   const [message, setMessage] = useState(" "); //default message
 
@@ -267,11 +267,11 @@ const ReportImpact = (props) => {
   const handleRegisterDevice = (async (event) => {
     event.preventDefault();
 
-    if(newDevice.length !== 15 || isNaN(newDevice) === true){
-      setNotif('Invalid device ID. Only numerical values are allowed (15 digits).');
-      setShowAlertField(true);
-      return;
-    }
+    // if(newDevice.length !== 15 || isNaN(newDevice) === true){
+    //   setNotif('Invalid device ID. Only numerical values are allowed (15 digits).');
+    //   setShowAlertField(true);
+    //   return;
+    // }
 
     const iotexChainID = await web3.eth.net.getId();
 
@@ -321,12 +321,12 @@ const ReportImpact = (props) => {
             </Toast.Body>
         </Toast>
 
-        <Toast show={showAlertField} onClose={toggleShowAlertField} delay={3000} autohide>
+        {/* <Toast show={showAlertField} onClose={toggleShowAlertField} delay={3000} autohide>
             <Toast.Header>
             <strong className="me-auto">Notification</strong>
             </Toast.Header>
             <Toast.Body>{notif}</Toast.Body>
-        </Toast>
+        </Toast> */}
         
         </ToastContainer>
         </Col>

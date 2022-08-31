@@ -105,7 +105,7 @@ const BondIssue = (props) => {
     else if(value === "Volume of recycled materials"){
       return 2;
     }
-    else if(value === "Social indicator"){
+    else if(value === "Diversity ratio"){
       return 3;
     }
     else{
@@ -218,7 +218,7 @@ const BondIssue = (props) => {
             <option>None</option>
             <option>Greenhouse gas emissions (CO2)</option>
             <option>Volume of recycled materials</option>
-            <option>Social indicator</option>
+            <option>Diversity ratio</option>
 
           </Form.Select>
 
@@ -234,7 +234,7 @@ const BondIssue = (props) => {
             <option>None</option>
             <option>Greenhouse gas emissions (CO2)</option>
             <option>Volume of recycled materials</option>
-            <option>Social indicator</option>
+            <option>Diversity ratio</option>
           </Form.Select>
         </Form.Group>
 
@@ -244,7 +244,7 @@ const BondIssue = (props) => {
             <option>None</option>
             <option>Greenhouse gas emissions (CO2)</option>
             <option>Volume of recycled materials</option>
-            <option>Social indicator</option>
+            <option>Diversity ratio</option>
           </Form.Select>
         </Form.Group>
       </Row>
@@ -252,7 +252,7 @@ const BondIssue = (props) => {
       <Row className="mb-3">
 
         <Form.Group as={Col} controlId="formGridBondPrice">
-          <Form.Label>Bond price (IOTX)</Form.Label>
+          <Form.Label>Bond price per unit (IOTX)</Form.Label>
           <Form.Control 
             placeholder="Enter amount" 
             name = "bondPrice"
@@ -281,7 +281,7 @@ const BondIssue = (props) => {
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridPeriods">
-          <Form.Label>Number of bonds</Form.Label>
+          <Form.Label>Number of bond units</Form.Label>
           <Form.Control 
             placeholder="Enter number"             
             name = "numberOfBonds"

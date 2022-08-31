@@ -101,6 +101,7 @@ const Verifier = () => {
     const [isVerifier, setVerifier] = useState(false);
 
     const checkVerifier = async(id) => {
+      setVerifier(false);
       const addressArray = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
@@ -113,14 +114,6 @@ const Verifier = () => {
         setVerifier(true);
       }
     }
-
-    // function print(){
-    //     console.log(bondObjects[0].is_verified);
-    // }
-
-    // function printBondID(){
-    //     console.log(selectedBond);
-    // }
     
     useEffect(() => {
         if(selectedBondAddress.length > 0 && selectedBondABI.length > 0){
@@ -188,8 +181,6 @@ const Verifier = () => {
         to: bondContract._address, // Required except during contract publications.
         from: walletAddress, // must match user's active address.
         data: bondContract.methods.verifyImpact(true).encodeABI(),
-        // gasPrice: "1000000000000",
-        // gas: "85000",
         chainId: iotexChainID
       };
   
@@ -207,8 +198,6 @@ const Verifier = () => {
         to: bondContract._address, // Required except during contract publications.
         from: walletAddress, // must match user's active address.
         data: bondContract.methods.verifyImpact(false).encodeABI(),
-        // gasPrice: "1000000000000",
-        // gas: "85000",
         chainId: iotexChainID
       };
   
@@ -250,7 +239,8 @@ const Verifier = () => {
           <Container>
           <br></br>
     
-            <Table striped bordered hover variant = "success">
+          <div style={{height: 465, overFlowX: 'auto', overflowY : 'auto'}}> 
+            <Table striped bordered hover variant = "success" responsive>
             <thead>
             <tr>
             <th>ID</th>
@@ -290,6 +280,7 @@ const Verifier = () => {
             </tbody> 
 
             </Table>
+            </div>
 
             <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
@@ -329,8 +320,6 @@ const Verifier = () => {
             </Form>
 
             </Modal>
-
-            {/* <td><Button onClick={printBondID}> test </Button></td> */}
 
             </Container>
 

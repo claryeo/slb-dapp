@@ -3,8 +3,6 @@ import {useState} from 'react';
 import { useNavigate } from "react-router-dom";
 
 import Button from 'react-bootstrap/Button';
-// import Toast from 'react-bootstrap/Toast';
-// import ToastContainer from 'react-bootstrap/ToastContainer';
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 
@@ -77,7 +75,6 @@ const Investor = () => {
             bondDetails.push(eachBond);
         }
       
-        // console.log(bondDetails);
         
     };
 
@@ -87,7 +84,6 @@ const Investor = () => {
     const [selectedBondABI, setSelectedBondABI] = useState("");
 
     useEffect(() => {
-        //does not return value so forEach is used instead of map
         contractData.forEach((d) => {
             contractDataArray.push(Object.values(d));
         });
@@ -105,16 +101,8 @@ const Investor = () => {
         }
         getBonds();
         
-    }); //should not have callback here
+    }); 
 
-
-    // function print(){
-    //     console.log(bondObjects[0].address);
-    // }
-
-    // function printBondID(){
-    //     console.log(selectedBond);
-    // }
     
     useEffect(() => {
         if(selectedBondAddress.length > 0 && selectedBondABI.length > 0){
@@ -164,16 +152,16 @@ const Investor = () => {
 
           <Container>
           <br></br>
-    
-            <Table striped bordered hover variant = "success">
+            <div style={{height: 465, overFlowX: 'auto', overflowY : 'auto'}}> 
+            <Table striped bordered hover variant = "success" responsive>
             <thead>
             <tr>
             <th>ID</th>
             {/* <th>Address</th> */}
             <th>Description</th>
             <th>Bond state</th>
-            <th>Bonds purchased (%)</th>
-            <th>Bond price (IOTX)</th>
+            <th>Bond units purchased (%)</th>
+            <th>Bond price per unit (IOTX)</th>
             <th>Coupon (IOTX)</th>
             <th>Action</th>
             </tr>
@@ -200,8 +188,7 @@ const Investor = () => {
             </tbody> 
 
             </Table>
-
-            {/* <td><Button onClick={printBondID}> test </Button></td> */}
+            </div>
 
             </Container>
 

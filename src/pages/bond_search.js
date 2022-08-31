@@ -164,7 +164,9 @@ const BondSearch = (props) => {
   const handleBondPurchase = (async (event) => {
     event.preventDefault();
 
-    if(numberOfBonds > message[21] || isNaN(numberOfBonds) === true){
+    if(parseInt(numberOfBonds) > parseInt(message[21]) || isNaN(numberOfBonds) === true){
+      console.log(numberOfBonds);
+      console.log(message[21]);
       setNotif('Invalid number of bonds purchased.');
       setShowAlertField(true);
       return;
@@ -201,7 +203,7 @@ const BondSearch = (props) => {
   const handleCouponClaim = (async (event) => {
     event.preventDefault();
 
-    if(couponPeriod > message[14] || isNaN(couponPeriod) === true){
+    if(parseInt(couponPeriod) > parseInt(message[14]) || isNaN(couponPeriod) === true){
       setNotif('Invalid coupon period.');
       setShowAlertField(true);
       return;
@@ -338,7 +340,7 @@ const BondSearch = (props) => {
           <td>{message[3]}</td>
         </tr>
         <tr>
-          <td>Bond Price (IOTX)</td>
+          <td>Bond Price per unit (IOTX)</td>
           <td>{message[4]}</td>
         </tr>
         <tr>
@@ -350,7 +352,7 @@ const BondSearch = (props) => {
           <td>{message[6]}</td>
         </tr>
         <tr>
-          <td>Total bonds issued</td>
+          <td>Total Bond units issued</td>
           <td>{message[7]}</td>
         </tr>
         <tr>
@@ -430,9 +432,9 @@ const BondSearch = (props) => {
       <br/><br/>
       <Form className = "text-start" onSubmit={handleBondPurchase}>
       <Form.Text className="text-muted">
-        Number of bonds purchased: {message[13]}
+        Number of bond units purchased: {message[13]}
         <br></br>
-        Number of bonds available for sale: {message[21]}
+        Number of bond units available for sale: {message[21]}
       </Form.Text>
       <InputGroup className="mb-3">
       <Form.Control

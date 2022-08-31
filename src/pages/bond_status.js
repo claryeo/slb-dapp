@@ -102,7 +102,7 @@ const BondStatus = (props) => {
     const transactionParameters = {
       to: contractAddress, // Required except during contract publications.
       from: walletAddress, // must match user's active address.
-      data: bondContract.methods.setbondActive().encodeABI(), 
+      data: bondContract.methods.setBondActive().encodeABI(), 
       gasPrice: web3.utils.toHex("1000000000000"),
       gas: web3.utils.toHex("85000"), //should be in hex format too
       chainId: iotexChainID
@@ -121,7 +121,7 @@ const BondStatus = (props) => {
     const transactionParameters = {
       to: contractAddress, // Required except during contract publications.
       from: walletAddress, // must match user's active address.
-      data: bondContract.methods.setbondRedeemed().encodeABI(), 
+      data: bondContract.methods.setBondRedeemed().encodeABI(), 
       gasPrice: web3.utils.toHex("1000000000000"),
       gas: web3.utils.toHex("85000"), //should be in hex format too
       chainId: iotexChainID
