@@ -1,6 +1,7 @@
-SLB-dApp
+# SLB-dApp
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 Link to smart contract repository: https://github.com/claryeo/slb-contracts.
 
 ## Summary
@@ -8,6 +9,8 @@ Link to smart contract repository: https://github.com/claryeo/slb-contracts.
 The SLB dApp is a bonds-as-a-service platform for SLB market participants. The SLB dApp utilises the synergistic benefits of blockchain, digital twin and IoT technology to create an end-to-end digital solution for activity across the SLB lifecycle.
 
 The primary user roles are: (1) Investor, (2) Issuer, (3) Verifier, (4) Regulator.
+
+![UML state machine](./img/uml_state_machine.png)
 
 ## Setup
 
